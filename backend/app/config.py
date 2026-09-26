@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     # Application Metadata
     APP_NAME: str = "ThreatPro - RAKSHAK Intelligence Grid"
     APP_VERSION: str = "2.0.0"
-    DEBUG: bool = True
+    DEBUG: bool = False
 
     # Server
     HOST: str = "0.0.0.0"
