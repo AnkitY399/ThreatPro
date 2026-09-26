@@ -1,6 +1,11 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const GeoMap = dynamic(() => import('./GeoMap'), {
+  ssr: false,
+});
 import { api, formatCurrency, formatTimeAgo, maskAccount, getRiskColor, getCategoryColor, getSeverityColor } from '@/lib/utils';
 
 export default function DashboardPage() {
@@ -9,6 +14,7 @@ export default function DashboardPage() {
   const [snapshot, setSnapshot] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [dossier, setDossier] = useState<any>(null);
+  const [locations, setLocations] = useState<any[]>([]);
 
   useEffect(() => {
     loadDashboard();
@@ -16,14 +22,16 @@ export default function DashboardPage() {
 
   async function loadDashboard() {
     try {
-      const [txData, muleData, graphData] = await Promise.all([
+      const [txData, muleData, graphData, locationData] = await Promise.all([
         api.getTransactions(true),
         api.detectMuleNetworks(),
         api.getGraphSnapshot(50),
+        api.getGeospatialLocations(),
       ]);
       setTxns(txData);
       setMuleNetworks(muleData);
       setSnapshot(graphData);
+      setLocations(locationData);
     } catch (err) {
       console.error('Dashboard load error:', err);
     } finally {
@@ -110,6 +118,21 @@ export default function DashboardPage() {
         </div>
       )}
 
+      <div className="glass-card glass-card-blue p-5 mb-6">
+        <div className="flex items-center gap-2 mb-4">
+         <div className="w-6 h-6 rounded-md bg-cyber-cyan/10 flex items-center justify-center">
+          <span className="text-cyber-cyan text-xs">●</span>
+        </div>
+        <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+          Geospatial Intelligence
+        </h3>
+        <span className="ml-auto text-[10px] font-mono text-gray-500">
+          {locations.length} locations
+        </span>
+       </div>
+
+       <GeoMap locations={locations} />
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Graph Visualization Panel */}
         <div className="lg:col-span-3 glass-card glass-card-blue p-5">

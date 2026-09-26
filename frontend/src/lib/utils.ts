@@ -90,6 +90,10 @@ export class ApiClient {
     return this.request(`/api/v1/graph/snapshot?max_nodes=${maxNodes}`);
   }
 
+  async getGeospatialLocations(): Promise<any[]> {
+    return this.request('/api/v1/geospatial/locations?skip=0&limit=100');
+  }
+
   async getTransactions(suspiciousOnly: boolean = false): Promise<any[]> {
     return this.request(`/api/v1/graph/transactions?suspicious_only=${suspiciousOnly}&limit=200`);
   }
