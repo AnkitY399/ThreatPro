@@ -85,10 +85,6 @@ Open http://localhost:3000 to see the application.
 - `npm run build` — Build the frontend for production
 - `uvicorn app.main:app --reload` — Run the FastAPI backend
 
-## Demo
-
-To start the demo, run:
-
 ```bash
 bash start_demo.sh
 ```
