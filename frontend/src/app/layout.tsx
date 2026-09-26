@@ -39,7 +39,7 @@ export default function RootLayout({
                 </div>
                 <div>
                   <h1 className="text-sm font-bold text-white tracking-tight">
-                    Trishul<span className="text-cyber-blue">.AI</span>
+                    ThreatPro
                   </h1>
                   <p className="text-[10px] text-gray-500 tracking-wider uppercase">RAKSHAK Intelligence Grid</p>
                 </div>
@@ -65,9 +65,9 @@ export default function RootLayout({
                   <span className="text-[10px] text-gray-500 tracking-wider">SYSTEM ACTIVE</span>
                 </div>
                 <div className="flex items-center space-x-2 text-[10px] text-gray-500">
-                  <span>v2.0.0</span>
+                  <span>Demo v1.0</span>
                   <span className="text-gray-700">|</span>
-                  <span>ET Hackathon 2.0</span>
+                  <span>ThreatPro Demo</span>
                 </div>
               </div>
             </div>
